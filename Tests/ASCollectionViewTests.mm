@@ -369,7 +369,7 @@
   XCTAssertTrue(ASRangeTuningParametersEqualToRangeTuningParameters(preloadParams, [collectionView tuningParametersForRangeType:ASLayoutRangeTypePreload]));
 }
 
-// https://github.com/TextureGroup/Texture/issues/1094
+// Informations to test: https://github.com/TextureGroup/Texture/issues/1094
 - (void)testThatCollectionNodeCanHandleNilRangeController
 {
   UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
