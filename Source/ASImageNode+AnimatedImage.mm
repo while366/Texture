@@ -29,7 +29,6 @@
 - (void)_locked_setDefaultImage:(UIImage *)image;
 @end
 
-NSString *const ASAnimatedImageDefaultRunLoopMode = NSRunLoopCommonModes;
 
 @implementation ASImageNode (AnimatedImage)
 
@@ -43,13 +42,13 @@ NSString *const ASAnimatedImageDefaultRunLoopMode = NSRunLoopCommonModes;
 
 - (void)_locked_setAnimatedImage:(id <ASAnimatedImageProtocol>)animatedImage
 {
-  ASAssertLocked(__instanceLock__);
-  
+  DISABLED_ASAssertLocked(__instanceLock__);
+
   if (ASObjectIsEqual(_animatedImage, animatedImage) && (animatedImage == nil || animatedImage.playbackReady)) {
     return;
   }
   
-  id <ASAnimatedImageProtocol> previousAnimatedImage = _animatedImage;
+  __block id <ASAnimatedImageProtocol> previousAnimatedImage = _animatedImage;
   
   _animatedImage = animatedImage;
   
@@ -70,22 +69,35 @@ NSString *const ASAnimatedImageDefaultRunLoopMode = NSRunLoopCommonModes;
       [self _locked_setShouldAnimate:YES];
     }
   } else {
-      // Clean up after ourselves.
-      self.contents = nil;
-      [self setCoverImage:nil];
-  }
-  
-  [self animatedImageSet:_animatedImage previousAnimatedImage:previousAnimatedImage];
+    // Clean up after ourselves.
     
-  // Animated image can take while to dealloc, do it off the main queue
-  if (previousAnimatedImage != nil) {
-    ASPerformBackgroundDeallocation(&previousAnimatedImage);
+    // Don't bother using a `_locked` version for setting contnst as it should be pretty safe calling it with
+    // reaquire the lock and would add overhead to introduce this version
+    self.contents = nil;
+    [self _locked_setCoverImage:nil];
   }
+
+  // Push calling subclass to the next runloop cycle
+  // We have to schedule the block on the common modes otherwise the tracking mode will not be included and it will
+  // not fire e.g. while scrolling down
+  CFRunLoopPerformBlock(CFRunLoopGetCurrent(), kCFRunLoopCommonModes, ^(void) {
+    [self animatedImageSet:animatedImage previousAnimatedImage:previousAnimatedImage];
+
+    // Animated image can take while to dealloc, do it off the main queue
+    if (previousAnimatedImage != nil) {
+      ASPerformBackgroundDeallocation(&previousAnimatedImage);
+    }
+  });
+  // Don't need to wakeup the runloop as the current is already running
+  // CFRunLoopWakeUp(runLoop); // Should not be necessary
 }
 
 - (void)animatedImageSet:(id <ASAnimatedImageProtocol>)newAnimatedImage previousAnimatedImage:(id <ASAnimatedImageProtocol>)previousAnimatedImage
 {
-  //Subclasses may override
+  // Subclass hook should not be called with the lock held
+  DISABLED_ASAssertUnlocked(__instanceLock__);
+  
+  // Subclasses may override
 }
 
 - (id <ASAnimatedImageProtocol>)animatedImage
@@ -119,7 +131,7 @@ NSString *const ASAnimatedImageDefaultRunLoopMode = NSRunLoopCommonModes;
 
 - (void)_locked_setCoverImageCompleted:(UIImage *)coverImage
 {
-  ASAssertLocked(__instanceLock__);
+  DISABLED_ASAssertLocked(__instanceLock__);
   
   _displayLinkLock.lock();
   BOOL setCoverImage = (_displayLink == nil) || _displayLink.paused;
@@ -138,7 +150,7 @@ NSString *const ASAnimatedImageDefaultRunLoopMode = NSRunLoopCommonModes;
 
 - (void)_locked_setCoverImage:(UIImage *)coverImage
 {
-  ASAssertLocked(__instanceLock__);
+  DISABLED_ASAssertLocked(__instanceLock__);
   
   //If we're a network image node, we want to set the default image so
   //that it will correctly be restored if it exits the range.
@@ -181,7 +193,7 @@ NSString *const ASAnimatedImageDefaultRunLoopMode = NSRunLoopCommonModes;
 
 - (void)_locked_setShouldAnimate:(BOOL)shouldAnimate
 {
-  ASAssertLocked(__instanceLock__);
+  DISABLED_ASAssertLocked(__instanceLock__);
   
   // This test is explicitly done and not ASPerformBlockOnMainThread as this would perform the block immediately
   // on main if called on main thread and we have to call methods locked or unlocked based on which thread we are on
@@ -216,7 +228,7 @@ NSString *const ASAnimatedImageDefaultRunLoopMode = NSRunLoopCommonModes;
 
 - (void)_locked_startAnimating
 {
-  ASAssertLocked(__instanceLock__);
+  DISABLED_ASAssertLocked(__instanceLock__);
   
   // It should be safe to call self.interfaceState in this case as it will only grab the lock of the superclass
   if (!ASInterfaceStateIncludesVisible(self.interfaceState)) {
@@ -261,7 +273,7 @@ NSString *const ASAnimatedImageDefaultRunLoopMode = NSRunLoopCommonModes;
 - (void)_locked_stopAnimating
 {
   ASDisplayNodeAssertMainThread();
-  ASAssertLocked(__instanceLock__);
+  DISABLED_ASAssertLocked(__instanceLock__);
   
 #if ASAnimatedImageDebug
   NSLog(@"stopping animation: %p", self);
