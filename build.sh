@@ -35,7 +35,7 @@ function build_example {
             -sdk "$SDK" \
             -destination "$PLATFORM" \
             -derivedDataPath "$DERIVED_DATA_PATH" \
-            build | xcpretty $FORMATTER
+            build | xcpretty -s
     elif [ -f "${example}/Cartfile" ]; then
         echo "Using Carthage"
         local_repo=`pwd`
@@ -50,10 +50,15 @@ function build_example {
             -scheme Sample \
             -sdk "$SDK" \
             -destination "$PLATFORM" \
-            build | xcpretty $FORMATTER
+            build | xcpretty -s
 
         cd ../..
     fi
+}
+
+# Lint subspec
+function lint_subspec {
+    set -o pipefail && pod env && pod lib lint --allow-warnings --subspec="$1"
 }
 
 function cleanup {
@@ -66,12 +71,6 @@ MODE="$1"
 
 cleanup
 
-if type xcpretty-travis-formatter &> /dev/null; then
-    FORMATTER="-f $(xcpretty-travis-formatter)"
-  else
-    FORMATTER="-s"
-fi
-
 case "$MODE" in
 tests|all)
     echo "Building & testing AsyncDisplayKit."
@@ -81,7 +80,7 @@ tests|all)
         -scheme AsyncDisplayKit \
         -sdk "$SDK" \
         -destination "$PLATFORM" \
-        build-for-testing test | xcpretty $FORMATTER
+        build-for-testing test | xcpretty -s
     success="1"
     ;;
 
@@ -100,7 +99,7 @@ tests_listkit)
         -scheme ASDKListKitTests \
         -sdk "$SDK" \
         -destination "$PLATFORM" \
-        build-for-testing test | xcpretty $FORMATTER
+        build-for-testing test | xcpretty -s
     success="1"
     ;;
 
@@ -199,7 +198,7 @@ life-without-cocoapods|all)
         -scheme "Life Without CocoaPods" \
         -sdk "$SDK" \
         -destination "$PLATFORM" \
-        build | xcpretty $FORMATTER
+        build | xcpretty -s
     success="1"
     ;;
 
@@ -211,7 +210,7 @@ framework|all)
         -scheme Sample \
         -sdk "$SDK" \
         -destination "$PLATFORM" \
-        build | xcpretty $FORMATTER
+        build | xcpretty -s
     success="1"
     ;;
 
@@ -219,6 +218,28 @@ cocoapods-lint|all)
     echo "Verifying that podspec lints."
 
     set -o pipefail && pod env && pod lib lint --allow-warnings
+    success="1"
+    ;;
+
+cocoapods-lint-default-subspecs)
+    echo "Verifying that default subspecs lint."
+
+    for subspec in 'Core' 'PINRemoteImage' 'Video' 'MapKit' 'AssetsLibrary' 'Photos'; do
+        echo "Verifying that $subspec subspec lints."
+
+        lint_subspec $subspec
+    done
+    success="1"
+    ;;
+
+cocoapods-lint-other-subspecs)
+    echo "Verifying that other subspecs lint."
+
+    for subspec in 'IGListKit' 'Yoga' 'TextNode2'; do
+        echo "Verifying that $subspec subspec lints."
+
+        lint_subspec $subspec
+    done
     success="1"
     ;;
 
