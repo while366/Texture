@@ -30,6 +30,14 @@
 		058D0A40195D057000B7D73C /* ASTextNodeTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 058D0A36195D057000B7D73C /* ASTextNodeTests.mm */; };
 		058D0A41195D057000B7D73C /* ASTextNodeWordKernerTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 058D0A37195D057000B7D73C /* ASTextNodeWordKernerTests.mm */; };
 		05EA6FE71AC0966E00E35788 /* ASSnapshotTestCase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 05EA6FE61AC0966E00E35788 /* ASSnapshotTestCase.mm */; };
+		0AB36BD023F58A9800C496E1 /* ASIGListAdapterBasedDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = CCBD05DF1E4147B000D18509 /* ASIGListAdapterBasedDataSource.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		0AB36BD123F58AA300C496E1 /* ASIGListAdapterBasedDataSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = CCBD05DE1E4147B000D18509 /* ASIGListAdapterBasedDataSource.mm */; };
+		0AB36BD723F59A1500C496E1 /* IGListKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB36BD523F59A1500C496E1 /* IGListKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		0AB36BDC23F59A6200C496E1 /* PINOperation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB36BD923F59A6200C496E1 /* PINOperation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		0AB36BDD23F59A6200C496E1 /* PINCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB36BDA23F59A6200C496E1 /* PINCache.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		0AB36BDE23F59A6200C496E1 /* PINRemoteImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB36BDB23F59A6200C496E1 /* PINRemoteImage.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		0AB36BDF23F59ACE00C496E1 /* IGListDiffKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB36BD623F59A1500C496E1 /* IGListDiffKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		0AB36BE523F5A0D800C496E1 /* IGListAdapter+AsyncDisplayKit.mm in Sources */ = {isa = PBXBuildFile; fileRef = CCE04B211E313EB9006AEBBB /* IGListAdapter+AsyncDisplayKit.mm */; };
 		18C2ED7F1B9B7DE800F627B3 /* ASCollectionNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 18C2ED7C1B9B7DE800F627B3 /* ASCollectionNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		18C2ED831B9B7DE800F627B3 /* ASCollectionNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 18C2ED7D1B9B7DE800F627B3 /* ASCollectionNode.mm */; };
 		1A6C000D1FAB4E2100D05926 /* ASCornerLayoutSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A6C000B1FAB4E2000D05926 /* ASCornerLayoutSpec.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -623,6 +631,11 @@
 		058D0A44195D058D00B7D73C /* ASBaseDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASBaseDefines.h; sourceTree = "<group>"; };
 		05EA6FE61AC0966E00E35788 /* ASSnapshotTestCase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ASSnapshotTestCase.mm; sourceTree = "<group>"; };
 		05F20AA31A15733C00DCA68A /* ASImageProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASImageProtocols.h; sourceTree = "<group>"; };
+		0AB36BD523F59A1500C496E1 /* IGListKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IGListKit.framework; path = Carthage/Build/iOS/IGListKit.framework; sourceTree = "<group>"; };
+		0AB36BD623F59A1500C496E1 /* IGListDiffKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IGListDiffKit.framework; path = Carthage/Build/iOS/IGListDiffKit.framework; sourceTree = "<group>"; };
+		0AB36BD923F59A6200C496E1 /* PINOperation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINOperation.framework; path = Carthage/Build/iOS/PINOperation.framework; sourceTree = "<group>"; };
+		0AB36BDA23F59A6200C496E1 /* PINCache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINCache.framework; path = Carthage/Build/iOS/PINCache.framework; sourceTree = "<group>"; };
+		0AB36BDB23F59A6200C496E1 /* PINRemoteImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINRemoteImage.framework; path = Carthage/Build/iOS/PINRemoteImage.framework; sourceTree = "<group>"; };
 		18C2ED7C1B9B7DE800F627B3 /* ASCollectionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASCollectionNode.h; sourceTree = "<group>"; };
 		18C2ED7D1B9B7DE800F627B3 /* ASCollectionNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ASCollectionNode.mm; sourceTree = "<group>"; };
 		1950C4481A3BB5C1005C8279 /* ASEqualityHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASEqualityHelpers.h; sourceTree = "<group>"; };
@@ -1089,6 +1102,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AB36BDF23F59ACE00C496E1 /* IGListDiffKit.framework in Frameworks */,
+				0AB36BDC23F59A6200C496E1 /* PINOperation.framework in Frameworks */,
+				0AB36BDD23F59A6200C496E1 /* PINCache.framework in Frameworks */,
+				0AB36BDE23F59A6200C496E1 /* PINRemoteImage.framework in Frameworks */,
+				0AB36BD723F59A1500C496E1 /* IGListKit.framework in Frameworks */,
 				CC36C19C218B847400232F23 /* CoreMedia.framework in Frameworks */,
 				CC36C19A218B846F00232F23 /* CoreLocation.framework in Frameworks */,
 				CC36C198218B846300232F23 /* QuartzCore.framework in Frameworks */,
@@ -1155,6 +1173,11 @@
 		058D09AE195D04C000B7D73C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0AB36BDA23F59A6200C496E1 /* PINCache.framework */,
+				0AB36BD923F59A6200C496E1 /* PINOperation.framework */,
+				0AB36BDB23F59A6200C496E1 /* PINRemoteImage.framework */,
+				0AB36BD623F59A1500C496E1 /* IGListDiffKit.framework */,
+				0AB36BD523F59A1500C496E1 /* IGListKit.framework */,
 				CC36C19B218B847400232F23 /* CoreMedia.framework */,
 				CC36C199218B846F00232F23 /* CoreLocation.framework */,
 				CC36C197218B846300232F23 /* QuartzCore.framework */,
@@ -2023,6 +2046,7 @@
 				E5855DF01EBB4D83003639AE /* ASCollectionLayoutDefines.h in Headers */,
 				E5B5B9D11E9BAD9800A6B726 /* ASCollectionLayoutContext+Private.h in Headers */,
 				9C8898BD1C738BB800D6B02E /* ASTextKitFontSizeAdjuster.h in Headers */,
+				0AB36BD023F58A9800C496E1 /* ASIGListAdapterBasedDataSource.h in Headers */,
 				254C6B791BF94DF4003EC431 /* ASTextKitEntityAttribute.h in Headers */,
 				CC3B20841C3F76D600798563 /* ASPendingStateController.h in Headers */,
 				DE6EA3231C14000600183B10 /* ASDisplayNode+FrameworkPrivate.h in Headers */,
@@ -2385,7 +2409,9 @@
 				DEB8ED7C1DD003D300DBDE55 /* ASLayoutTransition.mm in Sources */,
 				CCA5F62E1EECC2A80060C137 /* ASAssert.mm in Sources */,
 				9F98C0261DBE29E000476D92 /* ASControlTargetAction.mm in Sources */,
+				0AB36BE523F5A0D800C496E1 /* IGListAdapter+AsyncDisplayKit.mm in Sources */,
 				9C70F2091CDABA36007D6C76 /* ASViewController.mm in Sources */,
+				0AB36BD123F58AA300C496E1 /* ASIGListAdapterBasedDataSource.mm in Sources */,
 				3917EBD51E9C2FC400D04A01 /* _ASCollectionReusableView.mm in Sources */,
 				CCA282D11E9EBF6C0037E8B7 /* ASTipsWindow.mm in Sources */,
 				CCCCCCE41EC3EF060087FE10 /* NSParagraphStyle+ASText.mm in Sources */,
@@ -2776,6 +2802,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -2809,6 +2839,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
@@ -2928,6 +2962,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "PROFILE=1";
