@@ -56,7 +56,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/3a4oT/PINRemoteImage.git", .branch("spmInXcode")),
-        .package(url: "https://github.com/3a4oT/IGListKit", .branch("spmBrain")),
+        .package(url: "https://github.com/3a4oT/IGListKit", .branch("catalystGO")),
     ],
     targets: [
         .target(
