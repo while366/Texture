@@ -56,7 +56,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/3a4oT/PINRemoteImage.git", .branch("15-03-21-spm")),
-        .package(url: "https://github.com/3a4oT/IGListKit", .branch("uniqBranchName")),
+        .package(url: "https://github.com/3a4oT/IGListKit", from: "4.0.1"),
     ],
     targets: [
         .target(
