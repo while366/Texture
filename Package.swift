@@ -19,22 +19,13 @@ let headersSearchPath: [CSetting] = [.headerSearchPath("."),
 
 let sharedDefines: [CSetting] = [
                                 // Disable "old" textnode by default for SPM
-                                .define("AS_ENABLE_TEXTNODE", to: "0"),
+                                .define("AS_USE_VIDEO", to: "1"),
     
                                 // PINRemoteImage always available for Texture
                                 .define("AS_PIN_REMOTE_IMAGE", to: "1"),
                                 
                                 // always disabled
                                 .define("IG_LIST_COLLECTION_VIEW", to: "0"),]
-
-func IGListKit(enabled: Bool) -> [CSetting] {
-    let state: String = enabled ? "1" : "0"
-    return [
-        .define("AS_IG_LIST_KIT", to: state),
-        .define("AS_IG_LIST_DIFF_KIT", to: state),
-    ]
-}
-
 
 let package = Package(
     name: "Texture",
@@ -44,32 +35,20 @@ let package = Package(
              .tvOS(.v10)
          ],
     products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "AsyncDisplayKit",
             type: .static,
             targets: ["AsyncDisplayKit"]),
-        .library(
-            name: "AsyncDisplayKitIGListKit",
-            type: .static,
-            targets: ["AsyncDisplayKitIGListKit"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/pinterest/PINRemoteImage.git", .branch("master")),
-        .package(url: "https://github.com/3a4oT/IGListKit", .branch("spmNumber10")),
+        .package(url: "https://github.com/pinterest/PINRemoteImage.git", .upToNextMajor(from: "3.0.3"))
     ],
     targets: [
         .target(
             name: "AsyncDisplayKit",
             dependencies: ["PINRemoteImage"],
-            path: "spm/Sources/AsyncDisplayKit",
-            cSettings: headersSearchPath + sharedDefines + IGListKit(enabled: false)
-        ),
-        .target(
-            name: "AsyncDisplayKitIGListKit",
-            dependencies: ["IGListKit", "PINRemoteImage"],
-            path: "spm/Sources/AsyncDisplayKitIGListKit/AsyncDisplayKit",
-            cSettings: headersSearchPath + sharedDefines + IGListKit(enabled: true)
+            path: "Source",
+            cSettings: headersSearchPath + sharedDefines
         ),
     ],
     cLanguageStandard: .c11,
